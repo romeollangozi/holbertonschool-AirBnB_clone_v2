@@ -241,7 +241,6 @@ class HBNBCommand(cmd.Cmd):
             for k, v in storage.all().items():
                 print_list.append((v))
 
-
     def help_all(self):
         """ Help information for the all command """
         print("Shows all objects, or all of a class")

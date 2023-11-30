@@ -33,9 +33,9 @@ class DBStorage:
         }
 
     def __init__(self):
-        self.__engine = create_engine('mysql+mysqldb://'+
-                                      f'{getenv("HBNB_MYSQL_USER")}:'+
-                                      f'{getenv("HBNB_MYSQL_PWD")}@'+
+        self.__engine = create_engine('mysql+mysqldb://' +
+                                      f'{getenv("HBNB_MYSQL_USER")}:' +
+                                      f'{getenv("HBNB_MYSQL_PWD")}@' +
                                       f'{getenv("HBNB_MYSQL_HOST")}:'
                                       f'3306/{getenv("HBNB_MYSQL_DB")}',
                                       pool_pre_ping=True)
