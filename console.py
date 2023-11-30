@@ -123,30 +123,24 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        try:
-            params = args[1:]
-            kwargs = {}
-            for para in params:
-                key, value = para.split("=")
-                if '"' not in value:
-                    if '.' in value:
-                        value = float(value)
-                    else:
-                        value = int(value)
+        params = args[1:]
+        kwargs = {}
+        for para in params:
+            key, value = para.split("=")
+            if '"' not in value:
+                if '.' in value:
+                    value = float(value)
                 else:
-                    if '_' in value:
-                        value = value.replace('_', ' ')
-                    value = value.replace('"', '')
-                kwargs[key] = value
-            new_instance = HBNBCommand.classes[args[0]](**kwargs)
-            storage.new(new_instance)
-            print(new_instance.id)
-            storage.save()
-        except Exception as e:
-            print("""Somehting went wrong please use the\n\
-                   command 'help create' to see the correct\n\
-                   way of creating an object""")
-            print(e)
+                    value = int(value)
+            else:
+                if '_' in value:
+                    value = value.replace('_', ' ')
+                value = value.replace('"', '')
+            kwargs[key] = value
+        new_instance = HBNBCommand.classes[args[0]](**kwargs)
+        print(new_instance.id)
+        storage.new(new_instance)
+        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -236,18 +230,17 @@ class HBNBCommand(cmd.Cmd):
         print_list = []
 
         if args:
-            args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
+            args = args.split(' ')  # remove possible trailing args
+            if args[0] not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(args[0]).items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 print_list.append((v))
 
-        print(print_list)
 
     def help_all(self):
         """ Help information for the all command """

@@ -33,11 +33,11 @@ class DBStorage:
         }
 
     def __init__(self):
-        self.__engine = create_engine(f'mysql+mysqldb:://\
-                                      {getenv("HBNB_MYSQL_USER")}:\
-                                      {getenv("HBNB_MYSQL_PWD")}@\
-                                      {getenv("HBNB_MYSQL_HOST")}:\
-                                      3306/{getenv("HBNB_MYSQL_DB")}',
+        self.__engine = create_engine('mysql+mysqldb://'+
+                                      f'{getenv("HBNB_MYSQL_USER")}:'+
+                                      f'{getenv("HBNB_MYSQL_PWD")}@'+
+                                      f'{getenv("HBNB_MYSQL_HOST")}:'
+                                      f'3306/{getenv("HBNB_MYSQL_DB")}',
                                       pool_pre_ping=True)
 
         self.__session = Session()
@@ -52,20 +52,21 @@ class DBStorage:
         if cls is not None:
             all = self.__session.query(DBStorage.tables[cls]).all()
             for object in all:
-                key = object['__class__'] + '.' + object['id']
+                temp_dict = object.to_dict()
+                key = temp_dict['__class__'] + '.' + temp_dict['id']
                 obj_dict[key] = object
         else:
             for table in DBStorage.tables.values():
                 all = self.__session.query(table).all()
                 for object in all:
-                    key = object['__class__'] + '.' + object['id']
+                    temp_dict = object.to_dict()
+                    key = temp_dict['__class__'] + '.' + temp_dict['id']
                     obj_dict[key] = object
         return obj_dict
 
     def new(self, obj):
         """ADD THE OBJECT TO THE CURRENT
             DATABASE SESSION"""
-
         self.__session.add(obj)
 
     def save(self):
