@@ -15,7 +15,7 @@ class State(BaseModel, Base):
     name = Column(String(128),
                   nullable=False)
 
-    cities = relationship("City", backref="state", cascade="all")
+    cities = relationship("City", backref="state", cascade="delete")
 
     @property
     def cities(self):

@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer,\
     String, DateTime, ForeignKey, Float
+from sqlalchemy.orm import relationship
 
 
 class Place(BaseModel, Base):
@@ -35,4 +36,13 @@ class Place(BaseModel, Base):
                       nullable=True)
     longitude = Column(Float,
                        nullable=True)
+    reviews = relationship('Review', cascade='delete', backref='place')
     amenity_ids = []
+
+    @property
+    def reviews(self):
+        from models.review import Review
+        from models import storage
+
+        return [review for review in storage.all(Review).values()
+                if review["place_id"] == self.id]

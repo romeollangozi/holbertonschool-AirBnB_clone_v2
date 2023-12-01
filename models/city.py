@@ -15,4 +15,4 @@ class City(BaseModel, Base):
                       nullable=False)
     name = Column(String(128),
                   nullable=False)
-    places = relationship('Place', cascade='all', backref='cities')
+    places = relationship('Place', cascade='delete', backref='cities')
