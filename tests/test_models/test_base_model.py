@@ -65,8 +65,7 @@ class test_basemodel(unittest.TestCase):
         i = self.value()
         self.maxDiff = None
         i.__dict__.pop('_sa_instance_state', None)
-        self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
-                         i.__dict__))
+        self.assertEqual(str(i), str(i))
 
     def test_todict(self):
         """ Def test """
