@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Test console module"""
 
+
 import unittest
 import console
 from console import HBNBCommand

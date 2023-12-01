@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """UNITEST MODEL """
+
+
 from models.base_model import BaseModel
 from models import base_model
 import unittest
@@ -11,7 +13,7 @@ from os import getenv
 
 
 class test_basemodel(unittest.TestCase):
-    """ """
+    """ Test initialization."""
 
     def __init__(self, *args, **kwargs):
         """ Constructor """

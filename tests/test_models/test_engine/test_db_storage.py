@@ -1,4 +1,7 @@
+#!/usr/bin/python3
 """Defines unnittests for models/engine/db_storage.py."""
+
+
 import models
 import unittest
 import MySQLdb
@@ -46,6 +49,7 @@ class TestDBStorage(unittest.TestCase):
             self.storage._DBStorage__session.commit()
 
     def test_docstrings(self):
+        """Test initialization."""
         self.assertIsNotNone(DBStorage.__doc__)
         self.assertIsNotNone(DBStorage.all.__doc__)
         self.assertIsNotNone(DBStorage.new.__doc__)
@@ -60,6 +64,7 @@ class TestDBStorage(unittest.TestCase):
         self.assertTrue(isinstance(self.storage._DBStorage__session, Session))
 
     def test_methods(self):
+        """Test initialization."""
         self.assertTrue(hasattr(DBStorage, "__init__"))
         self.assertTrue(hasattr(DBStorage, "all"))
         self.assertTrue(hasattr(DBStorage, "new"))
