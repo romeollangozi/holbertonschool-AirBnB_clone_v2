@@ -31,7 +31,7 @@ def c(text):
     """
     Dynamic routing
     """
-
+    text = text.replace("_", " ")
     return "C " + text
 
 
