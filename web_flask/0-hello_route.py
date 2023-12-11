@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Module to initiate a flask app
 """
