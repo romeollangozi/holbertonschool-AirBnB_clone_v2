@@ -30,7 +30,7 @@ def states_list():
     return render_template('7-states_list.html', all_states=all_states)
 
 
-@app.route('/cities_by_state', strict_slashes=False)
+@app.route('/cities_by_states', strict_slashes=False)
 def cities_by_state():
     """
     dynamic routing
