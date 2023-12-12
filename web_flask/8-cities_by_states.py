@@ -36,7 +36,6 @@ def cities_by_state():
     dynamic routing
     """
     all_states = [value for value in storage.all(State).values()]
-    print(all_states)
     all_states = sorted(all_states, key=lambda state: state.to_dict()['name'])
     return render_template('8-cities_by_states.html', all_states=all_states)
 

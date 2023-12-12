@@ -8,11 +8,11 @@
         <UL>
             {% for state in all_states %}
             <LI>{{state['id']}}: <B>{{state['name']}}</B></LI>
-                {% for city in state.cities %}
-                    <UL>
+                <UL>
+                {% for city in state.cities|sort(attribute='name') %}
                         <LI>{{city.to_dict()['id']}}: <B>{{city.to_dict()['name']}}</B></LI>
-                    </UL>
                 {% endfor %}
+                </UL>
             {% endfor %}
         </UL>
     </BODY>
